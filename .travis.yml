@@ -1,0 +1,42 @@
+---
+language: python
+python: "2.7"
+
+# Use the new container infrastructure
+sudo: false
+
+# Install ansible
+addons:
+  apt:
+    packages:
+      - python-pip
+
+install:
+  # Install ansible
+  - pip install ansible
+
+  # Install ansible-lint
+  - pip install ansible-lint
+
+  # Install yamllint
+  - pip install yamllint
+
+before_script:
+  # Check ansible version
+  - ansible --version
+
+  # Check ansible-lint version
+  - ansible-lint --version
+
+  # Check ansible-lint version
+  - yamllint --version
+
+script:
+  # Ansible Lint check
+  - ansible-lint .
+
+  # YAML Lint check
+  - yamllint .
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
