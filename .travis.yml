@@ -9,7 +9,7 @@ sudo: false
 addons:
   apt:
     packages:
-    - python-pip
+      - python-pip
 
 install:
   # Install ansible
@@ -18,15 +18,25 @@ install:
   # Install ansible-lint
   - pip install ansible-lint
 
+  # Install yamllint
+  - pip install yamllint
+
+before_script:
   # Check ansible version
   - ansible --version
 
-  # Create ansible.cfg with correct roles_path
-  - printf '[defaults]\nroles_path=../' >ansible.cfg
+  # Check ansible-lint version
+  - ansible-lint --version
+
+  # Check ansible-lint version
+  - yamllint --version
 
 script:
-  # Basic role syntax check
+  # Ansible Lint check
   - ansible-lint .
+
+  # YAML Lint check
+  - yamllint .
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

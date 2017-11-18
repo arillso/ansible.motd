@@ -10,7 +10,7 @@
         - "{{ ansible_os_family }}.yml"
         - "defaults.yml"
       paths:
-        -  "vars"
+        - "vars"
   tags:
     - configuration
     - packages

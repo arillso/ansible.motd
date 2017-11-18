@@ -55,4 +55,3 @@ motd_content: |
 
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   Last ansible run: {{ ansible_date_time.iso8601 }}
-  
