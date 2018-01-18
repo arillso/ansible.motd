@@ -1,0 +1,51 @@
+---
+# tasks file for arillso.motd
+
+- name: install motd
+  package:
+    name: update-motd
+
+- name: configure motd
+  become: true
+  template:
+    src: '{{ item }}.j2'
+    dest: '/etc/update-motd.d/{{ item }}'
+    owner: root
+    group: root
+    mode: '755'
+  with_items:
+    - 00-header
+    - 01-welcome
+    - 02-facts
+    - 03-sysinfo
+    - 90-updates-available
+    - 91-release-upgrade
+    - 95-hwe-eol
+    - 97-overlayroot
+    - 98-fsck-at-reboot
+    - 98-reboot-required
+    - 99-footer
+  tags:
+    - configuration
+
+- name: configure ascii-logo
+  become: true
+  copy:
+    content: '{{ motd_ascii_art }}'
+    dest: '/etc/default/motd-ascii_art'
+    owner: root
+    group: root
+    mode: '755'
+  tags:
+    - configuration
+
+- name: remove motd
+  become: true
+  file:
+    path: '/etc/update-motd.d/{{ item }}'
+    state: absent
+  with_items:
+    - 10-help-text
+    - 50-motd-news
+    - 51-cloudguest
+    - 99-esm

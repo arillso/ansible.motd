@@ -1,53 +1,24 @@
 # Ansible Role: motd
 
+[![Build Status](https://travis-ci.org/arillso/ansible.motd.svg?branch=master)](https://travis-ci.org/arillso/ansible.motd) [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://sbaerlo.ch/er/licence) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-motd-blue.svg)](https://galaxy.ansible.com/arillso/motd)
+
 ## Description
 
-Creates the motd file.
+Configuriet dynamic motd file on Ubuntu and Centos.
 
 ## Installation
 
-```
-$ ansible-galaxy install arillso.motd
+```bash
+ ansible-galaxy install arillso.motd
 ```
 
 ## Requirements
 
-None 
+None
 
 ## Example Motd
 
-```bash
-     _              _ _     _
-    / \   _ __  ___(_) |__ | | ___
-   / _ \ | '_ \/ __| | '_ \| |/ _ \
-  / ___ \| | | \__ \ | |_) | |  __/
- /_/   \_\_| |_|___/_|_.__/|_|\___|
-
---------------------------------------------------------------------------
-                    This system is managed by Ansible
---------------------------------------------------------------------------
-
- FQDN:                ansible.example.ch
- Distro:              CentOS 7.3.1611 Core
- Virtual:             YES
- Virtualization Type: kvm
-
- CPUs:                1
- RAM:                 1.0GB
- Swap:                2.0GB
- Timezone:            CET(+0100)
-
-
- Mount: /dev/mapper/centos_ansible-root(/)(17.5GB)
- Mount: /dev/vda1(/boot)(0.5GB)
-
- Interfaces:
-  Interface: lo
-   ip: 127.0.0.1
-  Interface: eth0
-   ip: 192.168.0.0
-   mac: 00:1a:67:16:11:52
-```
+Common
 
 ## Dependencies
 
@@ -63,6 +34,10 @@ None
 
 ## Changelog
 
+### 1.1
+
+* add support for dynamic motd
+
 ### 1.0
 
 * inital role
@@ -70,7 +45,7 @@ None
 ## Author
 
 * [Simon Bärlocher](https://sbaerlocher.ch)
- 
+
 ## License
 
 This project is under the MIT License. See the [LICENSE](https://sbaerlo.ch/licence) file for the full license text.
