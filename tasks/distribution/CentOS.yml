@@ -1,0 +1,29 @@
+---
+# tasks file for arillso.motd
+
+- name: configure motd
+  become: true
+  template:
+    src: '{{ item }}.j2'
+    dest: '/etc/profile.d/{{ item }}.sh'
+    owner: root
+    group: root
+    mode: '644'
+  with_items:
+    - 00-header
+    - 01-welcome
+    - 02-facts
+    - 03-sysinfo
+  tags:
+    - configuration
+
+- name: configure ascii-logo
+  become: true
+  copy:
+    content: '{{ motd_ascii_art }}'
+    dest: '/etc/default/motd-ascii_art'
+    owner: root
+    group: root
+    mode: '755'
+  tags:
+    - configuration

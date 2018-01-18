@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# System
+UPTIME=$(uptime -p)
+UPSINCE=$(uptime -s)
+USERS=$(w -h -s)
+# CPU and Load
+LOAD=$(cat /proc/loadavg | awk {'print $1 " " $2 " " $3'})
+CPUCORES=$(cat /proc/cpuinfo | grep -c processor)
+PROCESSCOUNT=$(ps aux | wc -l)
+# Memory
+TOTALMEM=$(free -m | head -n 2 | tail -n 1 | awk {'print $2'})MB
+MEMFREEREAL=$(free -m | head -n 2 | tail -n 1 | awk {'print $4'})MB
+SWAPUSAGE=$(free -m | tail -n 1 | awk {'print $3'})MB
+# Network
+GLOBALIPS=$(ip -o addr | awk '!/^[0-9]*: ?lo|link\/ether/ {print " "$2" : "$4}')
+# Disk space
+DF=$(df -h -x tmpfs -x devtmpfs -l)
+
+echo "Load: $LOAD / CPU cores: $CPUCORES / Running proc: $PROCESSCOUNT"
+echo "$UPTIME - since $UPSINCE"
+echo
+echo "Total: $TOTALMEM / Free: $MEMFREEREAL / Swap: $SWAPUSAGE"
+echo
+  {% if ansible_interfaces is defined %}
+echo "Interfaces:"
+  {%   for int in ansible_interfaces %}
+echo " Interface: {{ int }}"
+  {%     if hostvars[inventory_hostname]['ansible_'+int] is defined %}
+  {%       if hostvars[inventory_hostname]['ansible_'+int]['ipv4'] is defined %}
+  {%         if hostvars[inventory_hostname]['ansible_'+int]['ipv4']['address'] is defined %}
+echo "  ip: {{ hostvars[inventory_hostname]['ansible_'+int]['ipv4']['address'] }}"
+  {%           if hostvars[inventory_hostname]['ansible_'+int]['ipv4_secondaries'] is defined %}
+  {%             for secondaries in hostvars[inventory_hostname]['ansible_'+int]['ipv4_secondaries']  %}
+echo "      {{ secondaries['address'] }}"
+  {%             endfor %}
+  {%           endif %}
+  {%         endif %}
+  {%       endif %}
+  {%       if hostvars[inventory_hostname]['ansible_'+int]['macaddress'] is defined %}
+echo "  mac: {{ hostvars[inventory_hostname]['ansible_'+int]['macaddress'] }}"
+  {%       endif %}
+  {%     endif %}
+  {%   endfor %}
+  {% endif %}
+echo
+echo "$DF"
+echo
+echo "$USERS"
