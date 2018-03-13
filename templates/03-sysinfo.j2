@@ -15,7 +15,7 @@ SWAPUSAGE=$(free -m | tail -n 1 | awk {'print $3'})MB
 # Network
 GLOBALIPS=$(ip -o addr | awk '!/^[0-9]*: ?lo|link\/ether/ {print " "$2" : "$4}')
 # Disk space
-DF=$(df -h -x tmpfs -x devtmpfs -l)
+DF=$(df -h -x tmpfs -x devtmpfs -x overlay -l)
 
 echo "Load: $LOAD / CPU cores: $CPUCORES / Running proc: $PROCESSCOUNT"
 echo "$UPTIME - since $UPSINCE"
