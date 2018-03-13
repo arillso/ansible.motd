@@ -34,6 +34,10 @@ None
 
 ## Changelog
 
+### 1.2
+
+* add debian Support
+
 ### 1.1
 
 * add support for dynamic motd
