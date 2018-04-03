@@ -15,7 +15,7 @@ SWAPUSAGE=$(free -m | tail -n 1 | awk {'print $3'})MB
 # Network
 GLOBALIPS=$(ip -o addr | awk '!/^[0-9]*: ?lo|link\/ether/ {print " "$2" : "$4}')
 # Disk space
-DF=$(df -h -x tmpfs -x devtmpfs -x overlay -l)
+DF=$(df -h {% for x in motd_exclude_disk_space %}-x {{ x }} {% endfor %}-l)
 
 echo "Load: $LOAD / CPU cores: $CPUCORES / Running proc: $PROCESSCOUNT"
 echo "$UPTIME - since $UPSINCE"
@@ -25,20 +25,24 @@ echo
   {% if ansible_interfaces is defined %}
 echo "Interfaces:"
   {%   for int in ansible_interfaces %}
+  {%     if "veth" not in int %}
+  {%     if "br" not in int %}
 echo " Interface: {{ int }}"
-  {%     if hostvars[inventory_hostname]['ansible_'+int] is defined %}
-  {%       if hostvars[inventory_hostname]['ansible_'+int]['ipv4'] is defined %}
-  {%         if hostvars[inventory_hostname]['ansible_'+int]['ipv4']['address'] is defined %}
+  {%         if hostvars[inventory_hostname]['ansible_'+int] is defined %}
+  {%           if hostvars[inventory_hostname]['ansible_'+int]['ipv4'] is defined %}
+  {%             if hostvars[inventory_hostname]['ansible_'+int]['ipv4']['address'] is defined %}
 echo "  ip: {{ hostvars[inventory_hostname]['ansible_'+int]['ipv4']['address'] }}"
-  {%           if hostvars[inventory_hostname]['ansible_'+int]['ipv4_secondaries'] is defined %}
-  {%             for secondaries in hostvars[inventory_hostname]['ansible_'+int]['ipv4_secondaries']  %}
+  {%               if hostvars[inventory_hostname]['ansible_'+int]['ipv4_secondaries'] is defined %}
+  {%                 for secondaries in hostvars[inventory_hostname]['ansible_'+int]['ipv4_secondaries']  %}
 echo "      {{ secondaries['address'] }}"
-  {%             endfor %}
+  {%                 endfor %}
+  {%               endif %}
+  {%             endif %}
   {%           endif %}
-  {%         endif %}
-  {%       endif %}
-  {%       if hostvars[inventory_hostname]['ansible_'+int]['macaddress'] is defined %}
+  {%           if hostvars[inventory_hostname]['ansible_'+int]['macaddress'] is defined %}
 echo "  mac: {{ hostvars[inventory_hostname]['ansible_'+int]['macaddress'] }}"
+  {%           endif %}     
+  {%         endif %}
   {%       endif %}
   {%     endif %}
   {%   endfor %}
