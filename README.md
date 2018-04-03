@@ -34,6 +34,10 @@ None
 
 ## Changelog
 
+### 1.3
+
+* add option exlude file system
+
 ### 1.2
 
 * add debian Support
