@@ -23,5 +23,4 @@ echo "Project:              {{ ansible_project }}"
 {% if ansible_server_role is defined %}
 echo "Role:                 {{ ansible_server_role }}"
 {% endif %}
-echo "Last ansible run:     {{ ansible_date_time.iso8601 }}"
 echo
