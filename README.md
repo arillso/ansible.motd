@@ -1,6 +1,6 @@
 # Ansible Role: motd
 
-[![Build Status](https://travis-ci.org/arillso/ansible.motd.svg?branch=master)](https://travis-ci.org/arillso/ansible.motd) [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://sbaerlo.ch/er/licence) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-motd-blue.svg)](https://galaxy.ansible.com/arillso/motd)
+[![Build Status](https://img.shields.io/travis/arillso/ansible.motd.svg?branch=master&style=popout-square)](https://travis-ci.org/arillso/ansible.motd) [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=popout-square)](https://sbaerlo.ch/licence) [![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-motd-blue.svg?style=popout-square)](https://galaxy.ansible.com/arillso/motd) [![Ansible Role](https://img.shields.io/ansible/role/d/21815.svg?style=popout-square)](https://galaxy.ansible.com/arillso/motd)
 
 ## Description
 
@@ -29,30 +29,12 @@ None
 ```yml
 - hosts: all
   roles:
-     - arillso.motd
+    - arillso.motd
 ```
-
-## Changelog
-
-### 1.3
-
-* add option exlude file system
-
-### 1.2
-
-* add debian Support
-
-### 1.1
-
-* add support for dynamic motd
-
-### 1.0
-
-* inital role
 
 ## Author
 
-* [Simon Bärlocher](https://sbaerlocher.ch)
+- [Simon Bärlocher](https://sbaerlocher.ch)
 
 ## License
 
@@ -60,4 +42,4 @@ This project is under the MIT License. See the [LICENSE](https://sbaerlo.ch/lice
 
 ## Copyright
 
-(c) 2017, Simon Bärlocher
+(c) 2020, Simon Bärlocher
