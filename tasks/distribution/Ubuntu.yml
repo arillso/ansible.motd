@@ -1,14 +1,14 @@
 ---
 # tasks file for arillso.motd
 
-- name: Ubuntu | install motd
+- name: 'Ubuntu : install motd'
   become: true
   package:
     name: update-motd
   tags:
     - packages
 
-- name: Ubuntu | configure motd
+- name: 'Ubuntu : configure motd'
   become: true
   template:
     src: '{{ item }}.j2'
@@ -31,7 +31,7 @@
   tags:
     - configuration
 
-- name: Ubuntu | configure ascii-logo
+- name: 'Ubuntu : configure ascii-logo'
   become: true
   copy:
     content: '{{ motd_ascii_art }}'
@@ -42,7 +42,7 @@
   tags:
     - configuration
 
-- name: Ubuntu | remove motd
+- name: 'Ubuntu : remove motd'
   become: true
   file:
     path: '/etc/update-motd.d/{{ item }}'
@@ -50,5 +50,7 @@
   with_items:
     - 10-help-text
     - 50-motd-news
+    - 80-livepatch
+    - 50-landscape-sysinfo
     - 51-cloudguest
     - 99-esm

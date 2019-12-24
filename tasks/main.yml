@@ -2,15 +2,15 @@
 # tasks file for arillso.motd
 
 - name: add OS specific variables
-  include_vars: "{{ loop_vars }}"
+  include_vars: '{{ loop_vars }}'
   with_first_found:
     - files:
-        - "{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml"
-        - "{{ ansible_distribution }}.yml"
-        - "{{ ansible_os_family }}.yml"
-        - "defaults.yml"
+        - '{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml'
+        - '{{ ansible_distribution }}.yml'
+        - '{{ ansible_os_family }}.yml'
+        - 'defaults.yml'
       paths:
-        - "vars"
+        - 'vars'
   loop_control:
     loop_var: loop_vars
   tags:
@@ -18,15 +18,15 @@
     - packages
 
 - name: add distribution tasks
-  include_tasks: "{{ loop_distribution }}"
+  include_tasks: '{{ loop_distribution }}'
   with_first_found:
     - files:
-        - "{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml"
-        - "{{ ansible_distribution }}.yml"
-        - "{{ ansible_os_family }}.yml"
-        - "defaults.yml"
+        - '{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml'
+        - '{{ ansible_distribution }}.yml'
+        - '{{ ansible_os_family }}.yml'
+        - 'defaults.yml'
       paths:
-        - "distribution"
+        - 'distribution'
   loop_control:
     loop_var: loop_distribution
   tags:

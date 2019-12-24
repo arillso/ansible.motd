@@ -1,7 +1,7 @@
 ---
 # tasks file for arillso.motd
 
-- name: CentOS | configure motd
+- name: 'CentOS : configure motd'
   become: true
   template:
     src: '{{ item }}.j2'
@@ -17,7 +17,7 @@
   tags:
     - configuration
 
-- name: CentOS | configure ascii-logo
+- name: 'CentOS : configure ascii-logo'
   become: true
   copy:
     content: '{{ motd_ascii_art }}'

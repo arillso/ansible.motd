@@ -1,7 +1,7 @@
 ---
 # defaults file for arillso.motd
 
-motd_ascii_art: |-2
+motd_ascii_art: |2-
        _              _ _     _
       / \   _ __  ___(_) |__ | | ___
      / _ \ | '_ \/ __| | '_ \| |/ _ \
