@@ -24,7 +24,7 @@ echo "Total: $TOTALMEM / Free: $MEMFREEREAL / Swap: $SWAPUSAGE"
 echo
   {% if ansible_interfaces is defined %}
 echo "Interfaces:"
-  {%   for int in ansible_interfaces %}
+  {%   for int in ansible_interfaces | sort %}
   {%     if "veth" not in int %}
   {%     if "br" not in int %}
 echo " Interface: {{ int }}"
